@@ -1,6 +1,7 @@
 const webpack = require("webpack")
 const path = require("path");
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const WebpackPwaManifest = require('webpack-pwa-manifest');
 
 module.exports = {
   entry: {
@@ -49,6 +50,22 @@ module.exports = {
   new BundleAnalyzerPlugin({
     analyzerMode: 'static', // the report outputs to an html file in the dist folder
                             // if set to 'disable', it will stop the reporting
+  }),
+    // plugin to generate our pwa manifest
+  new WebpackPwaManifest({
+    name: 'Food Event', // name that displays on desktops
+    short_name: 'Foodies', // name that displays on mobile devices
+    description: 'An app that allows you to view upcoming food events',
+    start_url: '../public/index.html', // specify the homepage
+    background_color: '#01579b', // splash screen color
+    theme_color: '#ffffff', // sets the color of the tool bar. This color may also show up if the user is switching tasks, either on mobile or or a desktop device.
+    fingerprints: false, //  tell webpack whether or not it should generate unique fingerprints so that each time a new manifest is generated, it looks like this: manifest.lhge325d.json
+    inject: false, // determines whether the link to the manifest.json is added to the HTML
+    icons: [{
+      src: path.resolve('public/assets/img/icons/icon-512x512.png'), // specify the icon image
+      sizes: [96, 128, 192, 256, 384, 512], // specify a size ( 256x256 )/sizes [96, 128]
+      destination: path.join('assets', 'icons') // where the icons will be sent after the creation of the manifest is completed
+    }]
   })
   ],
   mode: "development"
