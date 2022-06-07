@@ -4,16 +4,16 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 
 module.exports = {
   entry: {
-    app: "./assets/js/script.js",
-    events: "./assets/js/events.js",
-    schedule: "./assets/js/schedule.js",
-    tickets: "./assets/js/tickets.js"
+    app: "./public/assets/js/script.js",
+    events: "./public/assets/js/events.js",
+    schedule: "./public/assets/js/schedule.js",
+    tickets: "./public/assets/js/tickets.js"
   }, // the file being minified / the files and their associated names
   output: {
     // path: path.join(__dirname + "/dist"), // the folder the new minified file will be put in
     // filename: "main.bundle.js" // the name of the new minified file
     filename: '[name].bundle.js', // use the previously used key name to name the output file
-    path: __dirname + '/dist',
+    path: __dirname + '/public/dist',
   },
   module: {
     rules: [ // identifies the type of files to pre-process using the test property
@@ -28,7 +28,7 @@ module.exports = {
                 return "[path][name].[ext]"
               },
               publicPath: function(url){ // specifies the output file path
-                return url.replace('../', '/assets/')
+                return url.replace('../', '/public/assets/')
               }
             }
           },

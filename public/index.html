@@ -166,4 +166,16 @@
       <div class="footer-copyright text-center py-3 text-white">© 2022 Trilogy Education Services, LLC, a 2U, Inc. brand. Confidential and Proprietary. All Rights Reserved.</div>        
     </footer>
 </body>
+<script>
+  // immediately invoke expression function (IIFE)
+  // the parenthesis around the function lets js know that this is a function expression, and not a part of the global space
+  (function(){
+    if('serviceWorker' in navigator){ // checks if the user has access to service worker, and if so, use the service-worker.js file
+      //navigator is the browser
+      navigator.serviceWorker.register('./service-worker.js')
+        .then(()=> console.log("Service worker registered successfully."))
+        .catch(err => console.log('Service worker registration failed:', err))
+    }
+  })(); // this last set of parenthesis will immediately invoke the function
+</script>
 </html>
